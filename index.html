@@ -10,39 +10,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>site</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            padding: 20px;
-            background-color: rgb(64, 64, 64);
-        }
-        header {
-            text-align: center;
-            padding: 10px;
-            background-color: #f2f2f2;
-        }
-        section {
-            margin-top: 20px;
-        }
-        footer {
-            text-align: center;
-            padding: 10px;
-            background-color: #f2f2f2;
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-        }
-        .button {
-            display: inline-block;
-            padding: 10px 20px;
-            font-size: 16px;
-            text-align: center;
-            text-decoration: none;
-            background-color: #4CAF50;
-            color: white;
-            border: 2px solid #4CAF50;
-            border-radius: 5px;
-            cursor: pointer;
+body {
+    font-family: Arial, sans-serif;
+    margin: 0; /* Reset margin to remove default browser margin */
+    padding: 0;
+    background-color: rgb(64, 64, 64);
+    color: #fff; /* Set text color to white for better readability */
+}
+
+header, footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #333; /* Darken the header and footer background color */
+}
+
+section {
+    margin-top: 20px;
+}
+
+footer {
+    position: fixed; /* Change position to fixed for footer to stick to the bottom */
+    bottom: 0;
+    width: 100%;
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    background-color: #4CAF50;
+    color: white;
+    border: 2px solid #4CAF50;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Hover effect for buttons */
+.button:hover {
+    background-color: #45a049; /* Darken button color on hover */
+}
+
         }
     </style>
 </head>
