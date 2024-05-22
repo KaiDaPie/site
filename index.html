@@ -16,23 +16,63 @@
             padding: 0;
             background-color: rgb(64, 64, 64);
             color: #fff;
-            transition: transform 1s ease-in-out; /* Add transition for smooth spinning effect */
+            height: 100vh;
+            overflow-y: scroll; /* Enable vertical scrolling */
         }
 
-        header, footer {
-            text-align: center;
+        header {
+            text-align: left;
             padding: 10px;
             background-color: #333;
         }
 
         section {
-            margin-top: 20px;
+            padding: 20px;
+            background-color: #404040;
         }
 
         footer {
             position: fixed;
             bottom: 0;
             width: 100%;
+            height: 40px;
+            background-color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: #fff;
+            padding: 0 10px;
+            box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        footer .start-menu {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        footer .start-menu img {
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+        }
+
+        footer .taskbar {
+            display: flex;
+            gap: 15px;
+        }
+
+        footer .taskbar a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        footer .datetime {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            white-space: nowrap;
+            margin-right: 20px; /* Adjusted margin to bring it left */
         }
 
         .button {
@@ -56,6 +96,36 @@
         .spin {
             transform: rotate(360deg);
         }
+
+        /* Start menu dropdown */
+        .start-dropdown {
+            display: none;
+            position: absolute;
+            bottom: 40px;
+            left: 0;
+            background-color: #333;
+            padding: 10px;
+            border: 1px solid #444;
+            border-radius: 3px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .start-dropdown a {
+            display: block;
+            padding: 5px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .start-dropdown a:hover {
+            background-color: #555;
+        }
+
+        /* Ensure time and date are fully visible */
+        .datetime {
+            max-width: 150px;
+            text-align: right;
+        }
     </style>
 </head>
 <body>
@@ -71,39 +141,54 @@
 
     <section>
         <h2>My Interests</h2>
-        <p>I love all things related to computers and technology. I also (ir)regularly make videos on Youtube and sit on Twitter for stupid amounts of time.</p>
+        <p>I love all things related to computers and technology. I also (ir)regularly make videos on YouTube and sit on Twitter for stupid amounts of time.</p>
     </section>
-
-    <footer>
-        <p>Thanks for visiting Kai's Website! ^w^</p>
-    </footer>
 
     <a href="/site/games" class="button">Games (not used yet)</a>
     <a href="/site/about" class="button">About Me</a>
 
-    <script>
-        // Konami Code sequence
-        const konamiCode = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
-        let konamiIndex = 0;
+    <footer>
+        <div class="start-menu">
+            <img src="https://github.com/KaiDaPie/site/blob/main/Untitled.jpg?raw=true" alt="start menu icon" onclick="toggleStartMenu()">
+            <span onclick="toggleStartMenu()">start >w< </span>
+            <div class="start-dropdown" id="startDropdown">
+                <a href="/site/">home</a>
+                <a href="/site/about">about</a>
+                <a href="/site/games">games</a>
+            </div>
+        </div>
+        <div class="taskbar">
+            <a href="/site/">home</a>
+            <a href="/site/about">about</a>
+            <a href="/site/games">games</a>
+        </div>
+        <div class="datetime">
+            <div class="time" id="time">time</div>
+            <div class="date" id="date">date</div>
+        </div>
+    </footer>
 
-        // Function to check key press
-        function checkKonamiCode(e) {
-            if (e.keyCode === konamiCode[konamiIndex]) {
-                konamiIndex++;
-                if (konamiIndex === konamiCode.length) {
-                    document.body.classList.add('spin');
-                    setTimeout(() => {
-                        document.body.classList.remove('spin');
-                    }, 1000); // Remove the class after the animation completes
-                    konamiIndex = 0;
-                }
-            } else {
-                konamiIndex = 0;
-            }
+    <script>
+
+        // Function to toggle start menu
+        function toggleStartMenu() {
+            const dropdown = document.getElementById('startDropdown');
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
         }
 
-        // Event listener for keydown
-        document.addEventListener('keydown', checkKonamiCode);
+        // Function to update time and date
+        function updateTime() {
+            const now = new Date();
+            const time = now.toLocaleTimeString();
+            const date = now.toLocaleDateString();
+            document.getElementById('time').textContent = time;
+            document.getElementById('date').textContent = date;
+        }
+
+        // Update time and date every second
+        setInterval(updateTime, 1000);
+        // Initial call to set the time and date immediately
+        updateTime();
     </script>
 </body>
 </html>
